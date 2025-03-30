@@ -1,5 +1,5 @@
 class Clod < Formula
-  desc "Claude Loader for preparing files for Claude AI's Project Knowledge"
+  desc "Project file manager for Claude AI integrations"
   homepage "https://github.com/fuzz/clod"
   url "https://github.com/fuzz/clod/archive/refs/tags/v0.1.0.tar.gz"
   # After creating the GitHub release, calculate the SHA256 with:
@@ -9,6 +9,7 @@ class Clod < Formula
   
   depends_on "cabal-install" => :build
   depends_on "ghc" => :build
+  depends_on "libmagic"
   depends_on "pandoc" => :recommended
 
   def install
@@ -17,32 +18,27 @@ class Clod < Formula
     
     # Generate man pages if pandoc is available
     if build.with? "pandoc"
-      mkdir "man"
       system "bin/generate-man-pages.sh"
       man1.install "man/clod.1"
       man7.install "man/clod.7"
       man8.install "man/clod.8"
     end
-    
-    # The wrapper script 'cld' is installed automatically by cabal
   end
 
   def caveats
     <<~EOS
-      Clod includes two executables:
+      Clod outputs the path to the staging directory, which you can use with:
       
-      - clod: The main program
-      - cld:  A wrapper that automatically opens the staging directory in your file browser
+      # On macOS, open the staging directory in Finder:
+        open `clod [options]`
       
-      To use the wrapper:
-        cld [options]
-        
-      To disable auto-opening (but still run clod):
-        cld --no-open [options]
+      # For scripts, you can capture the output:
+        STAGING_DIR=$(clod [options])
+        open "$STAGING_DIR"
     EOS
   end
 
   test do
-    assert_match "Clod - Claude Loader", shell_output("#{bin}/clod --help")
+    assert_match "Clod - Project file manager for Claude AI", shell_output("#{bin}/clod --help")
   end
 end
