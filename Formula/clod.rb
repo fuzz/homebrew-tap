@@ -15,8 +15,9 @@ class Clod < Formula
 
   def install
     system "cabal", "v2-update"
+    
     # Only install the main executable, not test programs
-    system "cabal", "v2-install", "--lib", "--program-suffix=", 
+    system "cabal", "v2-install", "--disable-tests", "--lib", "--program-suffix=", 
            "--installdir=#{bin}", "exe:clod"
     
     # Generate man pages directly during installation
