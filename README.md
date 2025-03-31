@@ -2,4 +2,4 @@
 
 ## Clod (meat-human hybrid)
 
-[https:/github.com/fuzz/clod](https://github.com/fuzz/clod)
+[https://github.com/fuzz/clod](https://github.com/fuzz/clod)
