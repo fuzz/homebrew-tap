@@ -15,11 +15,11 @@ class Clod < Formula
   depends_on "pandoc" => :recommended
 
   def install
-    system "cabal", "v2-update"
+    system "cabal", "update"
     
     # Use allow-newer flag to work around template-haskell version incompatibility
-    system "cabal", "v2-install", "--disable-tests", "--allow-newer=template-haskell", 
-           "--lib", "--program-suffix=", "--installdir=#{bin}", "exe:clod"
+    system "cabal", "install", "--disable-tests", "--allow-newer=template-haskell", 
+           "--program-suffix=", "--installdir=#{bin}", "exe:clod"
     
     # Install man pages directly from source
     if build.with? "pandoc"
