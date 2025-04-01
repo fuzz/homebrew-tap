@@ -1,11 +1,11 @@
 class Clod < Formula
   desc "Project file manager for Claude AI integrations"
   homepage "https://github.com/fuzz/clod"
-  url "https://hackage.haskell.org/package/clod-0.1.5/clod-0.1.5.tar.gz"
+  url "https://hackage.haskell.org/package/clod-0.1.6/clod-0.1.6.tar.gz"
   # Calculate the SHA256 with:
-  # curl -sL https://hackage.haskell.org/package/clod-0.1.5/clod-0.1.5.tar.gz | shasum -a 256
+  # curl -sL https://hackage.haskell.org/package/clod-0.1.6/clod-0.1.6.tar.gz | shasum -a 256
   # SHA will need to be updated after the package is uploaded to Hackage
-  sha256 "2ec526843f99c77903c4e16a40a1c73c395271ace69dc9d6e1d4dd8d81f47316"
+  sha256 "9d23b773c5b8dd1defce0017d78ab9637e60b53ec75b4135a7d228fed462750e"
   license "MIT"
   
   depends_on "cabal-install" => :build
@@ -21,13 +21,23 @@ class Clod < Formula
     system "cabal", "v2-install", "--disable-tests", "--allow-newer=template-haskell", 
            "--lib", "--program-suffix=", "--installdir=#{bin}", "exe:clod"
     
-    # Install pre-generated man pages during installation
+    # Install man pages directly from source
     if build.with? "pandoc"
-      system "bin/install-man-pages.sh", "#{buildpath}/brew_man"
-      # Only install man pages that were successfully generated
-      man1.install "brew_man/man1/clod.1" if File.exist? "#{buildpath}/brew_man/man1/clod.1"
-      man7.install "brew_man/man7/clod.7" if File.exist? "#{buildpath}/brew_man/man7/clod.7"
-      man8.install "brew_man/man8/clod.8" if File.exist? "#{buildpath}/brew_man/man8/clod.8"
+      # Generate man pages directly with pandoc
+      if File.exist?("#{buildpath}/man/clod.1.md")
+        system "pandoc", "-s", "-t", "man", "#{buildpath}/man/clod.1.md", "-o", "#{buildpath}/clod.1"
+        man1.install "#{buildpath}/clod.1" if File.exist?("#{buildpath}/clod.1")
+      end
+      
+      if File.exist?("#{buildpath}/man/clod.7.md")
+        system "pandoc", "-s", "-t", "man", "#{buildpath}/man/clod.7.md", "-o", "#{buildpath}/clod.7"
+        man7.install "#{buildpath}/clod.7" if File.exist?("#{buildpath}/clod.7")
+      end
+      
+      if File.exist?("#{buildpath}/man/clod.8.md")
+        system "pandoc", "-s", "-t", "man", "#{buildpath}/man/clod.8.md", "-o", "#{buildpath}/clod.8"
+        man8.install "#{buildpath}/clod.8" if File.exist?("#{buildpath}/clod.8")
+      end
     end
   end
 
