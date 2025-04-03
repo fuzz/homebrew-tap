@@ -1,9 +1,9 @@
 class Clod < Formula
   desc "Project file manager for Claude AI integrations"
   homepage "https://github.com/fuzz/clod"
-  url "https://hackage.haskell.org/package/clod-0.1.12/clod-0.1.12.tar.gz"
+  url "https://hackage.haskell.org/package/clod-0.1.13/clod-0.1.13.tar.gz"
   # Calculate the SHA256 with:
-  # curl -sL https://hackage.haskell.org/package/clod-0.1.12/clod-0.1.12.tar.gz | shasum -a 256
+  # curl -sL https://hackage.haskell.org/package/clod-0.1.13/clod-0.1.13.tar.gz | shasum -a 256
   # SHA will need to be updated after the package is uploaded to Hackage
   sha256 "55235a8ca747ce66ada0e5bc387eb756e8bea734744028c09b2869c29c2be7dd"
   license "MIT"
