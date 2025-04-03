@@ -1,12 +1,18 @@
 class Clod < Formula
   desc "Project file manager for Claude AI integrations"
   homepage "https://github.com/fuzz/clod"
-  url "https://hackage.haskell.org/package/clod-0.1.13/clod-0.1.13.tar.gz"
-  # Calculate the SHA256 with:
-  # curl -sL https://hackage.haskell.org/package/clod-0.1.13/clod-0.1.13.tar.gz | shasum -a 256
-  # SHA will need to be updated after the package is uploaded to Hackage
-  sha256 "a8c6c8637500e0e7a6e135272831b5ed9a06b1770cdf4afe9bd502d8b0e336f8"
+  url "https://hackage.haskell.org/package/clod-0.1.14/clod-0.1.14.tar.gz" # TARBALL_URL_MARKER
+  sha256 "a8c6c8637500e0e7a6e135272831b5ed9a06b1770cdf4afe9bd502d8b0e336f8" # TARBALL_SHA256_MARKER
   license "MIT"
+  
+  # Bottle specification - will be filled in after bottle creation
+  bottle do
+    root_url "https://github.com/fuzz/clod/releases/download/v0.1.13" # BOTTLE_ROOT_URL_MARKER
+    rebuild 1
+    sha256 cellar: :any, arm64_sequoia: "BOTTLE_SHA_PLACEHOLDER" # BOTTLE_SHA256_MARKER
+    # Add other platform/OS combinations as needed
+    # sha256 cellar: :any, sequoia: "INTEL_SHA_PLACEHOLDER"
+  end
   
   depends_on "cabal-install" => :build
   depends_on "ghc" => :build
