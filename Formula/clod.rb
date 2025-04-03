@@ -5,7 +5,7 @@ class Clod < Formula
   # Calculate the SHA256 with:
   # curl -sL https://hackage.haskell.org/package/clod-0.1.13/clod-0.1.13.tar.gz | shasum -a 256
   # SHA will need to be updated after the package is uploaded to Hackage
-  sha256 "55235a8ca747ce66ada0e5bc387eb756e8bea734744028c09b2869c29c2be7dd"
+  sha256 "a8c6c8637500e0e7a6e135272831b5ed9a06b1770cdf4afe9bd502d8b0e336f8"
   license "MIT"
   
   depends_on "cabal-install" => :build
