@@ -11,10 +11,12 @@ class Clod < Formula
   bottle do
     root_url "https://github.com/fuzz/clod/releases/download/v0.1.24" # BOTTLE_ROOT_URL_MARKER
     rebuild 1
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "e1b82e775ac7711a169a3eadcfbfb5f5ed864e1ab5ca9ed040a0cd3614a8285a" # BOTTLE_SHA256_MARKER
-    # Add other platform/OS combinations as needed
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "913c79ee42bd3871fae4051b243d0cd9a059d6dc5ecf33df8d514165809dbc12" # BOTTLE_SHA256_MARKER
+    # Custom URL to handle double-hyphen in bottle filename
+    url "https://github.com/fuzz/clod/releases/download/v0.1.24/clod--0.1.24.arm64_sequoia.bottle.2.tar.gz"    # Add other platform/OS combinations as needed
     # sha256 cellar: :any, sequoia: "INTEL_SHA_PLACEHOLDER"
-  end
+    # Custom URL to handle double-hyphen in bottle filename
+    url "https://github.com/fuzz/clod/releases/download/v0.1.24/clod--0.1.24.arm64_sequoia.bottle.2.tar.gz"  end
 
   depends_on 'cabal-install' => :build
   depends_on 'ghc' => :build
