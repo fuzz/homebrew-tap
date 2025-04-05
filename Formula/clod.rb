@@ -20,11 +20,25 @@ class Clod < Formula
   depends_on 'cabal-install' => :build
   depends_on 'ghc' => :build
   depends_on 'libmagic'
+  depends_on 'pkg-config' => :build
   depends_on 'xxhash' => :build
   depends_on 'pandoc' => :recommended
 
   def install
+    # Create a dynamic cabal.project.local to use Homebrew's libmagic
+    libmagic = Formula['libmagic']
+    (buildpath/"cabal.project.local").write <<~EOS
+      allow-newer: template-haskell
+      package magic
+        extra-include-dirs: #{libmagic.opt_include}
+        extra-lib-dirs: #{libmagic.opt_lib}
+        flags: +pkgconfig
+    EOS
+
     system 'cabal', 'v2-update'
+    
+    # Add pkg-config path for libmagic
+    ENV.prepend_path 'PKG_CONFIG_PATH', libmagic.opt_lib/'pkgconfig'
 
     # Use Homebrew's standard Cabal v2 arguments for a more reliable installation
     # Include allow-newer flag to work around template-haskell version incompatibility
