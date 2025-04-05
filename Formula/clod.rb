@@ -11,7 +11,7 @@ class Clod < Formula
   bottle do
     root_url "https://github.com/fuzz/clod/releases/download/v0.1.35" # BOTTLE_ROOT_URL_MARKER
     rebuild 7
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "df441c0962730dd64bc7acfe33d3da95593ea15e0170d28a1914344cb06f6449" # BOTTLE_SHA256_MARKER
+    sha256 cellar: :any, arm64_sequoia: "df441c0962730dd64bc7acfe33d3da95593ea15e0170d28a1914344cb06f6449" # BOTTLE_SHA256_MARKER
     
     # Add other platform/OS combinations as needed
     # sha256 cellar: :any, sequoia: "INTEL_SHA_PLACEHOLDER"
@@ -39,7 +39,13 @@ class Clod < Formula
     
     # Add pkg-config path for libmagic
     ENV.prepend_path 'PKG_CONFIG_PATH', libmagic.opt_lib/'pkgconfig'
-
+    
+    # Set LDFLAGS to ensure proper linking to libmagic
+    ENV.append 'LDFLAGS', "-L#{libmagic.opt_lib} -lmagic"
+    
+    # Set dynamic library path for the executable
+    ENV.append 'DYLD_LIBRARY_PATH', libmagic.opt_lib.to_s
+    
     # Use Homebrew's standard Cabal v2 arguments for a more reliable installation
     # Include allow-newer flag to work around template-haskell version incompatibility
     system 'cabal', 'v2-install', *std_cabal_v2_args, '--allow-newer=template-haskell', 'exe:clod'
