@@ -13,9 +13,6 @@ class Clod < Formula
     rebuild 2
     sha256 cellar: :any_skip_relocation, arm64_sequoia: "d36d2b1150d78a4556bc198f99bed662a929a0fbeadea4bcf77585643187c9e5" # BOTTLE_SHA256_MARKER
     
-    # Override bottle URL to handle double-hyphen in filename
-    bottle_url "https://github.com/fuzz/clod/releases/download/v0.1.28/clod--0.1.28.arm64_sequoia.bottle.2.tar.gz" # BOTTLE_URL_MARKER
-    
     # Add other platform/OS combinations as needed
     # sha256 cellar: :any, sequoia: "INTEL_SHA_PLACEHOLDER"
   end
