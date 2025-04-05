@@ -3,13 +3,13 @@
 class Clod < Formula
   desc 'Project file manager for Claude AI integrations'
   homepage 'https://github.com/fuzz/clod'
-  url "https://hackage.haskell.org/package/clod-0.1.37/clod-0.1.37.tar.gz" # TARBALL_URL_MARKER
-  sha256 "bf2986c15433f7253cd4936556cdb696e6a312840773adb5e7ae7239faa738d4" # TARBALL_SHA256_MARKER
+  url "https://hackage.haskell.org/package/clod-0.1.38/clod-0.1.38.tar.gz" # TARBALL_URL_MARKER
+  sha256 "b99a753254d69ff051a102551bb1e80c5ba311d7642e711fe0ef38a3af849915" # TARBALL_SHA256_MARKER
   license 'MIT'
 
   # Bottle specification - will be filled in after bottle creation
   bottle do
-    root_url "https://github.com/fuzz/clod/releases/download/v0.1.37" # BOTTLE_ROOT_URL_MARKER
+    root_url "https://github.com/fuzz/clod/releases/download/v0.1.38" # BOTTLE_ROOT_URL_MARKER
     rebuild 8
     sha256 cellar: :any_skip_relocation, arm64_sequoia: "423d2f3a4b3873863e0d8fccb040bfad717ec44755d1a9814261e5c443324b68" # BOTTLE_SHA256_MARKER
     
@@ -43,12 +43,17 @@ class Clod < Formula
     # Set LDFLAGS to ensure proper linking to libmagic
     ENV.append 'LDFLAGS', "-L#{libmagic.opt_lib} -lmagic"
     
-    # Set dynamic library path for the executable
-    ENV.append 'DYLD_LIBRARY_PATH', libmagic.opt_lib.to_s
-    
     # Use Homebrew's standard Cabal v2 arguments for a more reliable installation
     # Include allow-newer flag to work around template-haskell version incompatibility
     system 'cabal', 'v2-install', *std_cabal_v2_args, '--allow-newer=template-haskell', 'exe:clod'
+    
+    # Ensure the executable can find libmagic at runtime
+    if File.exist?(bin/"clod")
+      system "install_name_tool", "-change", 
+             "/usr/local/lib/libmagic.dylib", 
+             "#{libmagic.opt_lib}/libmagic.dylib", 
+             "#{bin}/clod"
+    end
 
     # Install man pages directly from source
     return unless build.with? 'pandoc'
