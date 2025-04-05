@@ -24,11 +24,11 @@ class Clod < Formula
   depends_on 'pandoc' => :recommended
 
   def install
-    system 'cabal', 'update'
+    system 'cabal', 'v2-update'
 
-    # Use allow-newer flag to work around template-haskell version incompatibility
-    system 'cabal', 'install', '--disable-tests', '--allow-newer=template-haskell',
-           '--program-suffix=', "--installdir=#{bin}", 'exe:clod'
+    # Use Homebrew's standard Cabal v2 arguments for a more reliable installation
+    # Include allow-newer flag to work around template-haskell version incompatibility
+    system 'cabal', 'v2-install', *std_cabal_v2_args, '--allow-newer=template-haskell', 'exe:clod'
 
     # Install man pages directly from source
     return unless build.with? 'pandoc'
