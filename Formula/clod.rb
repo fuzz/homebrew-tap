@@ -7,15 +7,15 @@ class Clod < Formula
   sha256 "b99a753254d69ff051a102551bb1e80c5ba311d7642e711fe0ef38a3af849915" # TARBALL_SHA256_MARKER
   license 'MIT'
 
-  # Bottle specification - will be filled in after bottle creation
-  bottle do
-    root_url "https://github.com/fuzz/clod/releases/download/v0.1.38" # BOTTLE_ROOT_URL_MARKER
-    rebuild 9
-    sha256 cellar: :any, arm64_sequoia: "c0d987c97dce51854af9a0321f0050bdcfcd169b7e0e4f71f5e08997fb408f45" # BOTTLE_SHA256_MARKER
+#  # Bottle specification - will be filled in after bottle creation
+#  bottle do
+#    root_url "https://github.com/fuzz/clod/releases/download/v0.1.38" # BOTTLE_ROOT_URL_MARKER
+#    rebuild 9
+#    sha256 cellar: :any, arm64_sequoia: "c0d987c97dce51854af9a0321f0050bdcfcd169b7e0e4f71f5e08997fb408f45" # BOTTLE_SHA256_MARKER
     
     # Add other platform/OS combinations as needed
     # sha256 cellar: :any, sequoia: "INTEL_SHA_PLACEHOLDER"
-  end
+#  end
 
   depends_on 'cabal-install' => :build
   depends_on 'ghc' => :build
