@@ -3,13 +3,13 @@
 class Clod < Formula
   desc 'Project file manager for Claude AI integrations'
   homepage 'https://github.com/fuzz/clod'
-  url "https://hackage.haskell.org/package/clod-0.1.34/clod-0.1.34.tar.gz" # TARBALL_URL_MARKER
-  sha256 "4ca988af99de00d71a47ef82d03dca5d11c97158f0f3ef3cd2eeaa1ce2d6db3c" # TARBALL_SHA256_MARKER
+  url "https://hackage.haskell.org/package/clod-0.1.35/clod-0.1.35.tar.gz" # TARBALL_URL_MARKER
+  sha256 "701a85f36788b65d79379e0e4d7c25292f78c83b18b22fb0806f3fa19710db4c" # TARBALL_SHA256_MARKER
   license 'MIT'
 
   # Bottle specification - will be filled in after bottle creation
   bottle do
-    root_url "https://github.com/fuzz/clod/releases/download/v0.1.34" # BOTTLE_ROOT_URL_MARKER
+    root_url "https://github.com/fuzz/clod/releases/download/v0.1.35" # BOTTLE_ROOT_URL_MARKER
     rebuild 6
     sha256 cellar: :any_skip_relocation, arm64_sequoia: "5ba8411758e26c8ed09ebceba01a3a8bf013054294828bdb96dac02e954522b6" # BOTTLE_SHA256_MARKER
     
