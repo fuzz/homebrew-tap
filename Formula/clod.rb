@@ -11,7 +11,7 @@ class Clod < Formula
   bottle do
     root_url "https://github.com/fuzz/clod/releases/download/v0.1.41" # BOTTLE_ROOT_URL_MARKER
     rebuild 1
-    sha256 cellar: :any, arm64_sequoia: "c0d987c97dce51854af9a0321f0050bdcfcd169b7e0e4f71f5e08997fb408f45" # BOTTLE_SHA256_MARKER
+    sha256 cellar: :any, arm64_sequoia: "cadc100443e09fc8bf4fffeefa5af6451a9d21f3f743b45337034a046655b886" # BOTTLE_SHA256_MARKER
     
     # Add other platform/OS combinations as needed
     # sha256 cellar: :any, sequoia: "INTEL_SHA_PLACEHOLDER"
